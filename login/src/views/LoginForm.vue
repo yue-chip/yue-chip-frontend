@@ -4,134 +4,95 @@
   </h2>
   <Form
     class="p-4 enter-x"
-    :model="formData"
-    ref="formRef"
+    :model="model"
+    ref="loginForm"
+    :rules="rulesRef"
+    @keypress.enter="logion"
   >
-    <FormItem name="account" class="enter-x">
+    <FormItem ref="username" name="username" class="enter-x" >
       <Input
         size="large"
-        v-model:value="formData.account"
+        v-model:value="model.username"
         placeholder="用户名"
         class="fix-auto-fill"
       />
     </FormItem>
-    <FormItem name="password" class="enter-x">
+    <FormItem ref="password" name="password"  class="enter-x" >
       <InputPassword
         size="large"
         visibilityToggle
-        v-model:value="formData.password"
+        v-model:value="model.password"
         placeholder="密码"
       />
     </FormItem>
-
-<!--    <ARow class="enter-x">-->
-<!--      <ACol :span="12">-->
-<!--        <FormItem>-->
-<!--          &lt;!&ndash; No logic, you need to deal with it yourself &ndash;&gt;-->
-<!--          <Checkbox v-model:checked="rememberMe" size="small">-->
-<!--            {{ t('sys.login.rememberMe') }}-->
-<!--          </Checkbox>-->
-<!--        </FormItem>-->
-<!--      </ACol>-->
-<!--      <ACol :span="12">-->
-<!--        <FormItem :style="{ 'text-align': 'right' }">-->
-<!--          &lt;!&ndash; No logic, you need to deal with it yourself &ndash;&gt;-->
-<!--          <Button type="link" size="small" @click="setLoginState(LoginStateEnum.RESET_PASSWORD)">-->
-<!--            {{ t('sys.login.forgetPassword') }}-->
-<!--          </Button>-->
-<!--        </FormItem>-->
-<!--      </ACol>-->
-<!--    </ARow>-->
-
     <FormItem class="enter-x">
-      <Button type="primary" size="large" block :loading="loading">
+      <Button type="primary" size="large" block @click.prevent="logion">
         登陆
       </Button>
-      <!-- <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
-        {{ t('sys.login.registerButton') }}
-      </Button> -->
     </FormItem>
-<!--    <ARow class="enter-x">-->
-<!--      <ACol :md="8" :xs="24">-->
-<!--        <Button block @click="setLoginState(LoginStateEnum.MOBILE)">-->
-<!--          {{ t('sys.login.mobileSignInFormTitle') }}-->
-<!--        </Button>-->
-<!--      </ACol>-->
-<!--      <ACol :md="6" :xs="24">-->
-<!--        <Button block @click="setLoginState(LoginStateEnum.REGISTER)">-->
-<!--          {{ t('sys.login.registerButton') }}-->
-<!--        </Button>-->
-<!--      </ACol>-->
-<!--    </ARow>-->
   </Form>
 </template>
 <script lang="ts" setup>
-  import { reactive, ref, unref, computed } from 'vue'
-
-  import { Checkbox, Form, Input, Row, Col, Button } from 'ant-design-vue'
-  // import LoginFormTitle from './LoginFormTitle.vue'
-  //
-  // import { useI18n } from '/@/hooks/web/useI18n'
-  // import { useMessage } from '/@/hooks/web/useMessage'
-  //
-  // import { useUserStore } from '/@/store/modules/user'
-  // import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin'
-  // import { useDesign } from '/@/hooks/web/useDesign'
-  // //import { onKeyStroke } from '@vueuse/core';
-  //
+  import { reactive, ref,getCurrentInstance} from 'vue'
+  import { Form, Input, Row, Col, Button } from 'ant-design-vue'
+  import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
+  import {Md5} from 'ts-md5';
+  const _this = getCurrentInstance();
   const ACol = Col
   const ARow = Row
   const FormItem = Form.Item
   const InputPassword = Input.Password
-  // const { t } = useI18n()
-  // const { notification, createErrorModal } = useMessage()
-  // const { prefixCls } = useDesign('login')
   const prefixCls = 'vben-login'
-  // const userStore = useUserStore()
-  //
-  // const { setLoginState, getLoginState } = useLoginState()
-  // const { getFormRules } = useFormRules()
-  //
-  const formRef = ref()
-  const loading = ref(false)
-  // const rememberMe = ref(false)
+  const useForm = Form.useForm;
 
-  const formData = reactive({
-    account: '',
+  const model = reactive({
+    username: '',
     password: '',
+    vCode: "11",
+    code: "111"
   })
+  const rulesRef = reactive({
+    username: [
+      {
+        required: true,
+        message: '请输入账号',
+        trigger:'blur'
+      },
+    ],
+    password: [
+      {
+        required: true,
+        message: '请输入密码',
+        trigger:'blur'
+      },
+    ],
+  });
+  function logion() {
+    _this.ctx.$refs.loginForm.validate().then(() => {
+      const formData = new FormData();
+      formData.append('password', Md5.hashStr(model.password));
+      formData.append('username', model.username);
+      formData.append('grant_type', 'password');
+      formData.append('client_id', 'yue-chip-client');
+      formData.append('client_secret','yue-chip-client');
+      formData.append('vCode', model.vCode);
+      formData.append('code',model.code);
+      axios.service.post('http://127.0.0.1:9090/yue-chip-oauth2-authorization-serve/oauth2/token', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then((data)=>{
+        if (data.status === 200){
+          location.href=window.location.protocol+"//"+window.location.host+"/frame/";
+        }
+      })
+      .catch(obj => {
+      })
+      .finally(()=>{
+      });
+      })
+    .catch(err => {
+    });
+  }
 
-  // const { validForm } = useFormValid(formRef)
-  //
-  // //onKeyStroke('Enter', handleLogin);
-  //
-  // const getShow = computed(() => unref(getLoginState) === LoginStateEnum.LOGIN)
-  //
-  // async function handleLogin() {
-  //   const data = await validForm()
-  //   if (!data) return
-  //   try {
-  //     loading.value = true
-  //     const userInfo = await userStore.login({
-  //       password: data.password,
-  //       username: data.account,
-  //       mode: 'none', //不要默认的错误提示
-  //     })
-  //     if (userInfo) {
-  //       notification.success({
-  //         message: t('sys.login.loginSuccessTitle'),
-  //         description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
-  //         duration: 3,
-  //       })
-  //     }
-  //   } catch (error) {
-  //     createErrorModal({
-  //       title: t('sys.api.errorTip'),
-  //       content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-  //       getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
-  //     })
-  //   } finally {
-  //     loading.value = false
-  //   }
-  // }
 </script>
