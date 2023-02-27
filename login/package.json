@@ -3,8 +3,8 @@
   "private": false,
   "version": "1.0.0",
   "scripts": {
-    "dev": "vite",
-    "build": "vue-tsc && vite build --mode pro"
+    "dev": "vite --mode dev",
+    "build": "vite build --mode pro"
   },
   "dependencies": {
     "@yue-chip/yue-chip-frontend-core": "^1.0.0",

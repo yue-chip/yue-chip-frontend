@@ -24,7 +24,7 @@ sudo apt -y install build-essential lua5.3 openssl libssl-dev libpcre3 libpcre3-
 
 cd ./LuaJIT-2.0.5
 sudo make && make install
-export LUAJIT_LIB=/usr/local/lib
+export LUAJIT_LIB=/usr/local/bin
 export LUAJIT_INC=/usr/local/include/luajit-2.0
 sudo make clean
 
@@ -34,6 +34,6 @@ cd ../nginx-1.22.1
 sudo make && make install
 sudo make clean
 
-sudo \cp -rf ../lua-resty-redis-0.28 /usr/local/nginx
-sudo \cp -rf ../lua-resty-http-0.15 /usr/local/nginx
-sudo \cp -ff ../conf/nginx.conf /usr/local/nginx/conf
+sudo \cp -rf ../lua-resty-redis-0.28 /usr/local/nginx/
+sudo \cp -rf ../lua-resty-http-0.15 /usr/local/nginx/
+sudo \cp -ff ../conf/nginx.conf /usr/local/nginx/conf/

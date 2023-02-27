@@ -18,6 +18,7 @@
   import layoutMenu from './components/menu/menu.vue'
   import layoutHeader from "./components/header/header.vue";
   import layoutContent from "./components/content/content.vue"
+
 </script>
 <style>
 #app {

@@ -35,7 +35,8 @@ service.interceptors.request.use((config: any) => {
     if (config.url.indexOf("http") > -1) {
         config.url = config.url + (config.url.indexOf("?") > -1 ? "&" : "?") + "_t=" + new Date().getTime();
     } else {
-        config.url = import.meta.env.VITE_BASEURL + import.meta.env.VITE_BASEURL + config.url + (config.url.indexOf("?") > -1 ? "&" : "?") + "_t=" + new Date().getTime();
+        // @ts-ignore
+        config.url = import.meta.env.VITE_BASEURL + import.meta.env.VITE_BASEAPI + config.url + (config.url.indexOf("?") > -1 ? "&" : "?") + "_t=" + new Date().getTime();
     }
     // if (request_host) {
     //     config.url = config.url + "&request_host="+request_host

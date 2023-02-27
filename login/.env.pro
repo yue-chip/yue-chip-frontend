@@ -1,3 +1,0 @@
-NODE_ENV=production
-VITE_BASEURL=""
-VITE_BASEAPI=""

@@ -30,6 +30,9 @@ export default defineConfig(({ mode }) => {
       windiCss({scan: {dirs: ['.'],fileExtensions: ['vue', 'js', 'ts','html']},}),
       viteCompression({verbose: true,disable: false,threshold: 10240,algorithm: "gzip",ext: ".gz",}),
     ],
+    server: {
+      host: '0.0.0.0'
+    },
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src')

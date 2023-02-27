@@ -37,7 +37,7 @@
   import { Form, Input, Row, Col, Button } from 'ant-design-vue'
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
   import {Md5} from 'ts-md5';
-  const _this = getCurrentInstance();
+  const _this:any = getCurrentInstance();
   const ACol = Col
   const ARow = Row
   const FormItem = Form.Item
@@ -77,12 +77,13 @@
       formData.append('client_secret','yue-chip-client');
       formData.append('vCode', model.vCode);
       formData.append('code',model.code);
-      axios.service.post('http://127.0.0.1:9090/yue-chip-oauth2-authorization-serve/oauth2/token', formData, {
+      axios.service.post('/yue-chip-oauth2-authorization-serve/oauth2/token', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then((data)=>{
         if (data.status === 200){
+          sessionStorage.setItem("token",data.data.access_token)
           location.href=window.location.protocol+"//"+window.location.host+"/frame/";
         }
       })
@@ -91,7 +92,7 @@
       .finally(()=>{
       });
       })
-    .catch(err => {
+    .catch((err: any) => {
     });
   }
 
