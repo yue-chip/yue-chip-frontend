@@ -9,6 +9,21 @@
       mode="inline"
       theme="dark"
   >
+    <template v-for="resource in resources" :key="resource.id">
+      <a-menu-item>
+        <template #icon>
+          <MailOutlined />
+        </template>
+        {{ resource.name }}
+      </a-menu-item>
+    </template>
+
+  </a-menu>
+
+  <a-menu
+      mode="inline"
+      theme="dark"
+  >
     <a-menu-item key="1">
       <template #icon>
         <MailOutlined />
@@ -46,6 +61,16 @@
   </a-menu>
 </template>
 <script setup lang="ts">
+  import { onMounted,reactive,ref} from 'vue'
+  import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
+
+  let resources = ref();
+
+  onMounted(() => {
+    axios.axiosGet("/yue-chip-upms-serve/user/console/currentUser/permissions",{},(data:any)=>{
+      resources.value = data.data;
+    },null)
+  })
 </script>
 <style lang="scss" scoped>
 .menu__logo {

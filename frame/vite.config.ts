@@ -29,6 +29,7 @@ export default defineConfig(({ mode }) => {
       viteCompression({verbose: true,disable: false,threshold: 10240,algorithm: "gzip",ext: ".gz",}),
     ],
     server: {
+      hmr: { overlay :false},
       host: '0.0.0.0'
     },
     resolve: {

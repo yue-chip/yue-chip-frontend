@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@yue-chip/yue-chip-frontend-core": "^1.0.0",
     "vue": "^3.2.45",
     "ant-design-vue": "^3.2.15",
     "vue-router": "^4.0.14",
