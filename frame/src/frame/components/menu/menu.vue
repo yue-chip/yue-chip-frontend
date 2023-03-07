@@ -67,7 +67,7 @@
   let resources = ref();
 
   onMounted(() => {
-    axios.axiosGet("/yue-chip-upms-serve/user/console/currentUser/permissions",{},(data:any)=>{
+    axios.axiosGet("/yue-chip-upms-serve/upms/console/currentUser/permissions",{},(data:any)=>{
       resources.value = data.data;
     },null)
   })
