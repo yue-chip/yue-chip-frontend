@@ -9,61 +9,23 @@
       mode="inline"
       theme="dark"
   >
-    <template v-for="resource in resources" :key="resource.id">
-      <a-menu-item>
-        <template #icon>
-          <MailOutlined />
-        </template>
-        {{ resource.name }}
-      </a-menu-item>
-    </template>
+    <a-sub-menu v-for="resource in resources" :key="resource.id">
+<!--      <template #icon>-->
+<!--        <MailOutlined />-->
+<!--      </template>-->
+      <template #title>{{ resource.name }}</template>
+      <a-menu-item @click="showMenu(children.name,children.url,children.id)" v-for="children in resource.children" :key="children.id">{{ children.name }}</a-menu-item>
+    </a-sub-menu>
 
   </a-menu>
 
-  <a-menu
-      mode="inline"
-      theme="dark"
-  >
-    <a-menu-item key="1">
-      <template #icon>
-        <MailOutlined />
-      </template>
-      Navigation One
-    </a-menu-item>
-    <a-menu-item key="2">
-      <template #icon>
-        <CalendarOutlined />
-      </template>
-      Navigation Two
-    </a-menu-item>
-    <a-sub-menu key="sub1">
-      <template #icon>
-        <AppstoreOutlined />
-      </template>
-      <template #title>Navigation Three</template>
-      <a-menu-item key="3">Option 3</a-menu-item>
-      <a-menu-item key="4">Option 4</a-menu-item>
-      <a-sub-menu key="sub1-2" title="Submenu">
-        <a-menu-item key="5">Option 5</a-menu-item>
-        <a-menu-item key="6">Option 6</a-menu-item>
-      </a-sub-menu>
-    </a-sub-menu>
-    <a-sub-menu key="sub2">
-      <template #icon>
-        <SettingOutlined />
-      </template>
-      <template #title>Navigation Four</template>
-      <a-menu-item key="7">Option 7</a-menu-item>
-      <a-menu-item key="8">Option 8</a-menu-item>
-      <a-menu-item key="9">Option 9</a-menu-item>
-      <a-menu-item key="10">Option 10</a-menu-item>
-    </a-sub-menu>
-  </a-menu>
 </template>
 <script setup lang="ts">
   import { onMounted,reactive,ref} from 'vue'
+  import { useStore } from 'vuex'
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
 
+  const store = useStore()
   let resources = ref();
 
   onMounted(() => {
@@ -71,6 +33,10 @@
       resources.value = data.data;
     },null)
   })
+
+  function showMenu(name:string,url:string,id:string){
+    store.commit('addMenu',{"title":name,"url":url,"key":id});
+  }
 </script>
 <style lang="scss" scoped>
 .menu__logo {

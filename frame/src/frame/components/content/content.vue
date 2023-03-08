@@ -1,17 +1,21 @@
 <template>
   <a-tabs v-model:activeKey="activeKey" hide-add type="editable-card" @edit="onEdit">
-    <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" :closable="pane.closable">
-      <iframe ref="contentIframe" id="contentIframe" width="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true" src="/role/"></iframe>
+    <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" >
+      <iframe ref="contentIframe" id="contentIframe" width="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true" :src="pane.url"></iframe>
     </a-tab-pane>
   </a-tabs>
 </template>
 
 <script setup lang="ts">
-import {  ref } from 'vue';
-const panes = ref([{ title: "Tab1", content: "Content of Tab Pane 1", key: 1 },{ title: "Tab2", content: "Content of Tab Pane 2", key: 2 }]);
-const activeKey = ref(panes.value[0].key);
+import {  ref,getCurrentInstance } from 'vue';
+const _this:any = getCurrentInstance();
+import { useStore } from 'vuex'
+const store = useStore()
+const panes = ref(store.state.panes);
+const activeKey = ref(store.state.activeKey);
 const newTabIndex = ref(0);
 function onEdit(targetKey:any)  {
+  console.log(activeKey.value)
   let lastIndex = 0;
   panes.value.forEach((pane, i) => {
     if (pane.key === targetKey) {
@@ -27,14 +31,6 @@ function onEdit(targetKey:any)  {
     }
   }
 };
-// function add(){
-//   activeKey.value = `newTab${newTabIndex.value++}`;
-//   panes.value.push({
-//     title: `New Tab ${activeKey.value}`,
-//     content: `Content of new Tab ${activeKey.value}`,
-//     key: activeKey.value,
-//   });
-// };
 </script>
 
 <style lang="less">
