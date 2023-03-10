@@ -1,35 +1,19 @@
 <template>
-  <a-tabs v-model:activeKey="activeKey" hide-add type="editable-card" @edit="onEdit">
-    <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" >
+  <a-tabs v-model:activeKey="store.state.activeKey" size="small" hide-add type="editable-card" @edit="onEdit">
+    <a-tab-pane v-for="pane in store.state.panes" :key="pane.key" :tab="pane.title" >
       <iframe ref="contentIframe" id="contentIframe" width="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true" :src="pane.url"></iframe>
     </a-tab-pane>
   </a-tabs>
 </template>
 
 <script setup lang="ts">
-import {  ref,getCurrentInstance } from 'vue';
+import {  ref,getCurrentInstance,reactive } from 'vue';
 const _this:any = getCurrentInstance();
 import { useStore } from 'vuex'
 const store = useStore()
-const panes = ref(store.state.panes);
-const activeKey = ref(store.state.activeKey);
 const newTabIndex = ref(0);
 function onEdit(targetKey:any)  {
-  console.log(activeKey.value)
-  let lastIndex = 0;
-  panes.value.forEach((pane, i) => {
-    if (pane.key === targetKey) {
-      lastIndex = i - 1;
-    }
-  });
-  panes.value = panes.value.filter(pane => pane.key !== targetKey);
-  if (panes.value.length && activeKey.value === targetKey) {
-    if (lastIndex >= 0) {
-      activeKey.value = panes.value[lastIndex].key;
-    } else {
-      activeKey.value = panes.value[0].key;
-    }
-  }
+  store.commit('removeTab',targetKey);
 };
 </script>
 
