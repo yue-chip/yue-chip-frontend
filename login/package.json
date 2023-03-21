@@ -24,7 +24,8 @@
     "vite": "^4.1.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-windicss": "^1.8.10",
-    "vue-tsc": "^1.0.24"
+    "vue-tsc": "^1.0.24",
+    "unplugin-vue-components": "^0.24.1"
   },
   "publishConfig": {
     "registry": "http://192.168.8.213:32129/repository/hosted-repository-npm/"

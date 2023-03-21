@@ -6,7 +6,6 @@ import {ref} from "vue";
 const mutations = {
     addMenu (state:any,menu:any) {
         state.activeKey=menu.key;
-        console.log(state.activeKey)
         let isExist = false;
         for (const index in state.panes) {
             if (state.panes[index].key === menu.key) {

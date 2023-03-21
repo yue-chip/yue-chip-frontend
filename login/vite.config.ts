@@ -5,6 +5,8 @@ import windiCss from "vite-plugin-windicss";
 // @ts-ignore
 import viteCompression from 'vite-plugin-compression';
 import fs from "fs";
+import Components from 'unplugin-vue-components/vite';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 
 const project_pages = {};
 const entryPath = resolve(__dirname, "./src");
@@ -29,6 +31,7 @@ export default defineConfig(({ mode }) => {
       vue(),
       windiCss({scan: {dirs: ['.'],fileExtensions: ['vue', 'js', 'ts','html']},}),
       viteCompression({verbose: true,disable: false,threshold: 10240,algorithm: "gzip",ext: ".gz",}),
+      Components({resolvers: [AntDesignVueResolver()]})
     ],
     server: {
       hmr: { overlay :false},

@@ -24,7 +24,7 @@
   import { onMounted,reactive,ref} from 'vue'
   import { useStore } from 'vuex'
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
-
+  import {Menu,MenuItem,SubMenu} from "ant-design-vue"
   const store = useStore()
   let resources = ref();
 
@@ -35,7 +35,7 @@
   })
 
   function showMenu(name:string,url:string,id:string){
-    store.commit('addMenu',{"title":name,"url":url,"key":id});
+    store.commit('addMenu',{"title":name,"url":url+"?_t=" + new Date().getTime(),"key":id});
   }
 </script>
 <style lang="scss" scoped>

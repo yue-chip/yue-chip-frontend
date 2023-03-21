@@ -8,8 +8,10 @@
 
 <script setup lang="ts">
 import {  ref,getCurrentInstance,reactive } from 'vue';
-const _this:any = getCurrentInstance();
 import { useStore } from 'vuex'
+import {Tabs,TabPane} from "ant-design-vue"
+const _this:any = getCurrentInstance();
+
 const store = useStore()
 const newTabIndex = ref(0);
 function onEdit(targetKey:any)  {
