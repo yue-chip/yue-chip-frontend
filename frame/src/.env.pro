@@ -1,3 +1,3 @@
 NODE_ENV=development
-VITE_BASEURL="
+VITE_BASEURL=""
 VITE_BASEAPI="/api"

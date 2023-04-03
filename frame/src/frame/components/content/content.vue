@@ -1,7 +1,7 @@
 <template>
   <a-tabs v-model:activeKey="store.state.activeKey" size="small" hide-add type="editable-card" @edit="onEdit">
     <a-tab-pane v-for="pane in store.state.panes" :key="pane.key" :tab="pane.title" >
-      <iframe ref="contentIframe" id="contentIframe" width="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="true" :src="pane.url"></iframe>
+      <iframe ref="contentIframe" id="contentIframe" width="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="true" :src="pane.url"></iframe>
     </a-tab-pane>
   </a-tabs>
 </template>
