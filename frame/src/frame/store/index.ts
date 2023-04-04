@@ -23,7 +23,9 @@ const mutations = {
                 state.panes.splice(i, 1)
             }
         });
-        state.activeKey = state.panes[state.panes.length-1].key;
+        if (state.panes.length>0) {
+            state.activeKey = state.panes[state.panes.length - 1].key;
+        }
     }
 }
 const actions = {}

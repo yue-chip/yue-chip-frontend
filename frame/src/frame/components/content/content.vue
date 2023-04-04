@@ -1,5 +1,5 @@
 <template>
-  <a-tabs v-model:activeKey="store.state.activeKey" size="small" hide-add type="editable-card" @edit="onEdit">
+  <a-tabs id="tabs" v-model:activeKey="store.state.activeKey" size="small" hide-add type="editable-card" @edit="onEdit" >
     <a-tab-pane v-for="pane in store.state.panes" :key="pane.key" :tab="pane.title" >
       <iframe ref="contentIframe" id="contentIframe" width="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="auto" allowtransparency="true" :src="pane.url"></iframe>
     </a-tab-pane>
@@ -18,8 +18,13 @@ function onEdit(targetKey:any)  {
   store.commit('removeTab',targetKey);
 };
 </script>
-
+<style lang="css">
+/*.ant-tabs-nav{*/
+/*    margin-bottom: 2px;*/
+/*}*/
+</style>
 <style lang="less">
+
 #content {
   min-height: e("calc(100vh - 142px) ")
 }

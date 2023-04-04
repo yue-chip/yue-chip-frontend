@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { message } from 'ant-design-vue'
+import "ant-design-vue/es/message/style/index.css"
 /* 防止重复提交，利用axios的cancelToken */
 let pending: any[] = []; // 声明一个数组用于存储每个ajax请求的取消函数和ajax标识
 const CancelToken: any = axios.CancelToken;
