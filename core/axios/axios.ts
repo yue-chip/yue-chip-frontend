@@ -131,7 +131,9 @@ const axiosGet = function (url:string,params:any,success:any,fail:any,finallyF:a
             _fail(fail,obj)
         })
         .finally(()=>{
-            finallyF();
+            if (finallyF) {
+                finallyF();
+            }
         });
 }
 
@@ -146,7 +148,9 @@ const axiosPut = function (url:string,params:any,success:any,fail:any,finallyF:a
             _fail(fail,obj)
         })
         .finally(()=>{
-            finallyF();
+            if (finallyF) {
+                finallyF();
+            }
         });
 }
 
@@ -161,7 +165,9 @@ const axiosPost = function (url:string,params:any,success:any,fail:any,finallyF:
             _fail(fail,obj)
         })
         .finally(()=>{
-            finallyF();
+            if (finallyF) {
+                finallyF();
+            }
         });
 }
 
@@ -176,7 +182,9 @@ const axiosDelete = function (url:string,params:any,success:any,fail:any,finally
             _fail(fail,obj);
         })
         .finally(()=>{
-            finallyF();
+            if (finallyF) {
+                finallyF();
+            }
         });
 }
 
