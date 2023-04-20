@@ -31,7 +31,7 @@
   onMounted(() => {
     axios.axiosGet("/yue-chip-upms-serve/upms/console/currentUser/permissions",{},(data:any)=>{
       resources.value = data.data;
-    },null)
+    },null,null)
   })
 
   function showMenu(name:string,url:string,id:string){

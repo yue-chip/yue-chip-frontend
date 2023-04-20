@@ -120,7 +120,7 @@ function _fail(failCallBack,fail){
     // }
 }
 
-const axiosGet = function (url:string,params:any,success:any,fail:any){
+const axiosGet = function (url:string,params:any,success:any,fail:any,finallyF:any){
     service.get(url,params)
         .then((data)=>{
             if (success) {
@@ -131,10 +131,11 @@ const axiosGet = function (url:string,params:any,success:any,fail:any){
             _fail(fail,obj)
         })
         .finally(()=>{
+            finallyF();
         });
 }
 
-const axiosPut = function (url:string,params:any,success:any,fail:any){
+const axiosPut = function (url:string,params:any,success:any,fail:any,finallyF:any){
     service.put(url,params)
         .then((data)=>{
             if (success) {
@@ -145,10 +146,11 @@ const axiosPut = function (url:string,params:any,success:any,fail:any){
             _fail(fail,obj)
         })
         .finally(()=>{
+            finallyF();
         });
 }
 
-const axiosPost = function (url:string,params:any,success:any,fail:any){
+const axiosPost = function (url:string,params:any,success:any,fail:any,finallyF:any){
     service.post(url,params)
         .then((data)=>{
             if (success) {
@@ -159,20 +161,22 @@ const axiosPost = function (url:string,params:any,success:any,fail:any){
             _fail(fail,obj)
         })
         .finally(()=>{
+            finallyF();
         });
 }
 
-const axiosDelete = function (url:string,params:any,success:any,fail:any){
+const axiosDelete = function (url:string,params:any,success:any,fail:any,finallyF:any){
     service.delete(url,params)
         .then((data)=>{
             if (success) {
-                success(data)
+                success(data);
             }
         })
         .catch(obj => {
-            _fail(fail,obj)
+            _fail(fail,obj);
         })
         .finally(()=>{
+            finallyF();
         });
 }
 
