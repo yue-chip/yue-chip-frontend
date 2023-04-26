@@ -15,7 +15,7 @@
         <template #overlay>
           <a-menu>
             <a-menu-item key="1" >
-              <template #icon><a-icon type="PoweroffOutlined" /></template>
+              <template #icon @click="logout"><a-icon type="PoweroffOutlined" /></template>
               退出登录
             </a-menu-item>
           </a-menu>
@@ -26,7 +26,10 @@
 </template>
 
 <script setup lang="ts">
-import {Menu,MenuItem} from "ant-design-vue"
+  import {Menu,MenuItem} from "ant-design-vue"
+  function logout(){
+
+  }
 </script>
 
 

@@ -8,6 +8,8 @@
   <a-menu
       mode="inline"
       theme="dark"
+      v-model:openKeys="openKeys"
+      v-model:selectedKeys="selectedKeys"
   >
     <a-sub-menu v-for="resource in resources" :key="resource.id">
 <!--      <template #icon>-->
@@ -27,12 +29,29 @@
   import {Menu,MenuItem,SubMenu} from "ant-design-vue"
   const store = useStore()
   let resources = ref();
-
+  let openKeys = ref([""]);
+  let selectedKeys = ref([""]);
   onMounted(() => {
     axios.axiosGet("/yue-chip-upms-serve/upms/console/currentUser/permissions",{},(data:any)=>{
       resources.value = data.data;
+      showMenu1(data.data,0);
     },null,null)
   })
+
+  function showMenu1(menu:any,parentId:any) {
+    menu.forEach( function(item:any) {
+      if (item.type.name === 'MENU' && item.url) {
+        if (!store.state.activeKey) {
+          showMenu(item.name, item.url, item.id);
+          selectedKeys.value[0] = item.id;
+          openKeys.value[0]=parentId;
+        }
+      }
+      if (item.children) {
+        showMenu1(item.children,item.id);
+      }
+    })
+  }
 
   function showMenu(name:string,url:string,id:string){
     store.commit('addMenu',{"title":name,"url":url+"?_t=" + new Date().getTime(),"key":id});
