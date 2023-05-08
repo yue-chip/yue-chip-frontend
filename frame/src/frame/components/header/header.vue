@@ -14,8 +14,8 @@
         </div>
         <template #overlay>
           <a-menu>
-            <a-menu-item key="1" >
-              <template #icon @click="logout"><a-icon type="PoweroffOutlined" /></template>
+            <a-menu-item key="1" @click="logout">
+              <template #icon ><PoweroffOutlined></PoweroffOutlined></template>
               退出登录
             </a-menu-item>
           </a-menu>
@@ -27,8 +27,10 @@
 
 <script setup lang="ts">
   import {Menu,MenuItem} from "ant-design-vue"
+  import { PoweroffOutlined } from '@ant-design/icons-vue';
   function logout(){
-
+    sessionStorage.clear();
+    window.location.href="/";
   }
 </script>
 
