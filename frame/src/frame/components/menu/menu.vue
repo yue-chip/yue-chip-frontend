@@ -32,23 +32,25 @@
   let openKeys = ref([""]);
   let selectedKeys = ref([""]);
   onMounted(() => {
-    axios.axiosGet("/yue-chip-upms-serve/upms/console/currentUser/permissions",{},(data:any)=>{
+    axios.axiosGet("/upms/console/currentUser/permissions",{},(data:any)=>{
       resources.value = data.data;
-      showMenu1(data.data,0);
+
+      intShowMenu(data.data,0);
     },null,null)
   })
 
-  function showMenu1(menu:any,parentId:any) {
+  function intShowMenu(menu:any,parentId:any) {
     menu.forEach( function(item:any) {
       if (item.type.name === 'MENU' && item.url) {
         if (!store.state.activeKey) {
           showMenu(item.name, item.url, item.id);
           selectedKeys.value[0] = item.id;
           openKeys.value[0]=parentId;
+          return;
         }
       }
-      if (item.children) {
-        showMenu1(item.children,item.id);
+      if (!store.state.activeKey && item.children) {
+        intShowMenu(item.children, item.id);
       }
     })
   }

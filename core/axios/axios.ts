@@ -51,7 +51,7 @@ service.interceptors.request.use((config: any) => {
     }
     const token = sessionStorage.getItem("token");
     if (token && token !== ''){
-        config.headers.Authorization = `Bearer ${token}`;
+        config.headers.token = `${token}`;
         let request_host = sessionStorage.getItem("register_host");
         if (request_host && request_host != 'null'){
             config.headers.requestHost = request_host;
