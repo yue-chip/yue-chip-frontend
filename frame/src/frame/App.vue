@@ -18,7 +18,6 @@
   import layoutMenu from './components/menu/menu.vue'
   import layoutHeader from "./components/header/header.vue";
   import layoutContent from "./components/content/content.vue"
-  import {Layout,LayoutSider} from "ant-design-vue"
 </script>
 <style>
 #app {

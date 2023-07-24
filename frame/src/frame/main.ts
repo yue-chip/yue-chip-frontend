@@ -1,8 +1,16 @@
 // @ts-ignore
 import { createApp } from 'vue'
 import App from './App.vue'
-// @ts-ignore
-// import Antd from 'ant-design-vue'
 import store from './store'
-// import 'ant-design-vue/dist/antd.css'
-createApp(App).use(store).mount('#app')
+import {Menu,MenuItem,SubMenu,Dropdown,Tabs,TabPane,message,Layout,LayoutSider} from "ant-design-vue"
+const app = createApp(App);
+app.use(Menu)
+  .use(MenuItem)
+  .use(SubMenu)
+  .use(Dropdown)
+  .use(Tabs)
+  .use(TabPane)
+  .use(Layout)
+  .use(LayoutSider)
+  .use(store).mount('#app')
+app.config.globalProperties.$message = message;

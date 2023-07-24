@@ -17,10 +17,10 @@
   </Form>
 </template>
 <script lang="ts" setup>
-  import 'ant-design-vue/dist/antd.min.css'
+
   import { reactive, ref,getCurrentInstance} from 'vue'
-  import { Form, Input, Row, Col, Button } from 'ant-design-vue'
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
+  import { Form, Input, Row, Col, Button,message} from 'ant-design-vue'
   import {Md5} from 'ts-md5';
   const _this:any = getCurrentInstance();
   const ACol = Col

@@ -28,6 +28,7 @@
 </template>
 <script lang="ts" setup>
   import LoginForm from './LoginForm.vue'
+  import 'ant-design-vue/dist/reset.css';
   const prefixCls = 'vben-login'
 </script>
 <style lang="less">

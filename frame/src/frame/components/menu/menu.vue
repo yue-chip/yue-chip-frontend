@@ -26,7 +26,6 @@
   import { onMounted,reactive,ref} from 'vue'
   import { useStore } from 'vuex'
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
-  import {Menu,MenuItem,SubMenu} from "ant-design-vue"
   const store = useStore()
   let resources = ref();
   let openKeys = ref([""]);
@@ -34,12 +33,11 @@
   onMounted(() => {
     axios.axiosGet("/upms/console/currentUser/permissions",{},(data:any)=>{
       resources.value = data.data;
-
-      intShowMenu(data.data,0);
+      initShowMenu(data.data,0);
     },null,null)
   })
 
-  function intShowMenu(menu:any,parentId:any) {
+  function initShowMenu(menu:any,parentId:any) {
     menu.forEach( function(item:any) {
       if (item.type.name === 'MENU' && item.url) {
         if (!store.state.activeKey) {
@@ -50,7 +48,7 @@
         }
       }
       if (!store.state.activeKey && item.children) {
-        intShowMenu(item.children, item.id);
+        initShowMenu(item.children, item.id);
       }
     })
   }
