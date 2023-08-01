@@ -27,6 +27,7 @@
 
 <script setup lang="ts">
   import { PoweroffOutlined } from '@ant-design/icons-vue';
+  import {message} from "ant-design-vue";
   function logout(){
     sessionStorage.clear();
     window.location.href="/";

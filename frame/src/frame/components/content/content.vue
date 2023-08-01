@@ -8,6 +8,7 @@
 
 <script setup lang="ts">
 import {  ref,getCurrentInstance,reactive } from 'vue';
+import {message} from "ant-design-vue";
 import { useStore } from 'vuex'
 const _this:any = getCurrentInstance();
 
@@ -18,9 +19,6 @@ function onEdit(targetKey:any)  {
 };
 </script>
 <style lang="less">
-#content {
-  min-height: e("calc(100vh - 138px) ")
-}
 #contentIframe{
   min-height: e("calc(100vh - 138px)");
 }
