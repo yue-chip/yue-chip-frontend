@@ -19,10 +19,10 @@ function onEdit(targetKey:any)  {
 </script>
 <style lang="less">
 #content {
-  min-height: e("calc(100vh - 142px) ")
+  min-height: e("calc(100vh - 138px) ")
 }
 #contentIframe{
-  min-height: e("calc(100vh - 142px)");
+  min-height: e("calc(100vh - 138px)");
 }
 </style>
 <style lang="scss" scoped>
