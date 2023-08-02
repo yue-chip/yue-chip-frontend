@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => {
       Components({resolvers: [AntDesignVueResolver({importStyle: false,}),],}),
     ],
     server: {
+      port: 5176,
       hmr: { overlay :false},
       host: '0.0.0.0'
     },
