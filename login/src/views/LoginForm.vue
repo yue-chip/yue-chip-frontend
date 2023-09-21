@@ -9,6 +9,9 @@
     <FormItem ref="password" name="password"  class="enter-x" >
       <InputPassword size="large" visibilityToggle v-model:value="model.password" placeholder="密码"/>
     </FormItem>
+    <FormItem ref="tenantId" name="tenantId" class="enter-x" >
+      <Input size="large" v-model:value="model.tenantId" placeholder="机构编码" class="fix-auto-fill"/>
+    </FormItem>
     <FormItem class="enter-x">
       <Button type="primary" size="large" block @click.prevent="logion">
         登陆
@@ -33,6 +36,7 @@
   const model = reactive({
     username: '',
     password: '',
+    tenantId: '',
     vCode: "11",
     code: "111"
   })
@@ -57,6 +61,7 @@
       const formData = new FormData();
       formData.append('password', Md5.hashStr(model.password));
       formData.append('username', model.username);
+      formData.append('tenantId', model.tenantId);
       formData.append('grant_type', 'password');
       formData.append('client_id', 'yue-chip-client');
       formData.append('client_secret','yue-chip-client');
