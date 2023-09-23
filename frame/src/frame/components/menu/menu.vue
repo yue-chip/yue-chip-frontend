@@ -3,7 +3,7 @@
     <div class="menu__logo-icon">
       <img src="../../../assets/images/logo.svg" />
     </div>
-    <span>粤芯科技管理平台</span>
+    <span>小未科技管理平台</span>
   </div>
   <a-menu
       mode="inline"

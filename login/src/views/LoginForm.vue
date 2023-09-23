@@ -67,7 +67,7 @@
       formData.append('client_secret','yue-chip-client');
       formData.append('vCode', model.vCode);
       formData.append('code',model.code);
-      axios.service.post('/upms/login', formData, {
+      axios.service.post('/upms/login1', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
