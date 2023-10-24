@@ -7,7 +7,7 @@
           <div class="my-auto">
             <img src="../assets/svg/login-box-bg.svg" class="w-1/2 -mt-16 -enter-x" />
             <div class="mt-10 font-medium text-white -enter-x">
-              <span class="inline-block mt-4 text-3xl">小未科技管理系统</span>
+              <span class="inline-block mt-4 text-3xl">中山某莫科技管理系统</span>
             </div>
             <div class="mt-5 font-normal text-white dark:text-gray-500 -enter-x">
               输入您的个人详细信息开始使用！

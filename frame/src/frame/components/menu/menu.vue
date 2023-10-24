@@ -13,6 +13,7 @@
   >
     <a-sub-menu v-for="resource in resources" :key="resource.id">
 <!--      <template #icon>-->
+
 <!--        <MailOutlined />-->
 <!--      </template>-->
       <template #title>{{ resource.name }}</template>
