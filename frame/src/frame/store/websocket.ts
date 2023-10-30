@@ -16,8 +16,8 @@ export const useWebSocketStore = defineStore({
         connect() {
             if (this.webSocket && this.webSocket.isOpen) return;
             //console.log(this.webSocket.isOpen);
-            
-            const url = 'ws://192.168.31.111/api/security/websocket/96eb6bf3-bf20-42e7-af33-24fd18bb9cbc'
+            const token = sessionStorage.getItem("token");
+            const url = 'ws://'+import.meta.env.VITE_WEBSOCKET + import.meta.env.VITE_BASEAPI+'/security/websocket/'+token
             const options = {
                 url,
                 messageCb: (msg: any) => {
@@ -26,7 +26,7 @@ export const useWebSocketStore = defineStore({
             }
             this.webSocket = new ReconWebSocket(options)
             console.log( this.webSocket);
-            
+
         },
         isConnect(): boolean {
             return this.webSocket && this.webSocket.isOpen
