@@ -14,7 +14,15 @@
         </div>
         <template #overlay>
           <a-menu>
-            <a-menu-item key="1" @click="logout">
+            <a-menu-item key="1" @click="">
+              <template #icon ><EditOutlined ></EditOutlined ></template>
+              修改资料
+            </a-menu-item>
+            <a-menu-item key="2" @click="">
+              <template #icon ><FormOutlined></FormOutlined></template>
+              修改密码
+            </a-menu-item>
+            <a-menu-item key="3" @click="logout">
               <template #icon ><PoweroffOutlined></PoweroffOutlined></template>
               退出登录
             </a-menu-item>
@@ -26,9 +34,10 @@
 </template>
 
 <script setup lang="ts">
-  import { PoweroffOutlined } from '@ant-design/icons-vue';
-  import {message} from "ant-design-vue";
+  import { PoweroffOutlined,EditOutlined,FormOutlined } from '@ant-design/icons-vue';
+  import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
   function logout(){
+    axios.axiosGet("/upms/login/out",{params: {}},(data:any)=>{},null,null)
     sessionStorage.clear();
     window.location.href="/";
   }
