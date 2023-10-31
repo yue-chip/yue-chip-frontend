@@ -75,7 +75,7 @@
     </a-modal>
 
 
-    <a-modal width="800px" v-model:visible="visibleUpdatePassword" title="修改密码" cancelText="取消" okText="保存" :destroyOnClose="true" :mask="true" :maskClosable="false" @cancel="cancelUpdatePassword" @ok="updatePassword">
+    <a-modal width="500px" v-model:visible="visibleUpdatePassword" title="修改密码" cancelText="取消" okText="保存" :destroyOnClose="true" :mask="true" :maskClosable="false" @cancel="cancelUpdatePassword" @ok="updatePassword">
       <a-form ref="updatePasswordFrom" :rules="rulesUpdatePassword" :model="updateModel" :labelCol="{span: 6,offset:0}" >
         <a-row >
           <a-col :span="24">
