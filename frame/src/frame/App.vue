@@ -1,10 +1,10 @@
 <template>
   <a-layout class="layout">
-    <a-layout-sider width="256">
+    <a-layout-sider width="230">
       <layout-menu />
     </a-layout-sider>
     <a-layout>
-      <a-layout-header class="header">
+      <a-layout-header class="header" style="height: 40px;">
         <layout-header />
       </a-layout-header>
       <a-layout-content class="container">
@@ -43,10 +43,10 @@ watch(wsMessage,()=>{
 })
 onMounted(()=>{
   webSocketStore.connect()
- 
+
 })
 /* const ws = new WebSocket('ws://192.168.31.111/api/security/websocket/96eb6bf3-bf20-42e7-af33-24fd18bb9cbc');
-  
+
   onMounted(()=>{
     ws.onopen = function(e){
     console.log('链接成功',e);

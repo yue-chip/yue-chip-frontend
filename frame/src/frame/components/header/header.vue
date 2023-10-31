@@ -1,5 +1,5 @@
 <template>
-  <div class="layout__header">
+  <div class="layout__header" style="height: 40px;">
     <div class="header__left">
     </div>
     <div class="header__right">
