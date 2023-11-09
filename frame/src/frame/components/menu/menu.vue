@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref, } from 'vue'
 import { useRouter } from 'vue-router';
-import { message } from "ant-design-vue";
 import { useStore } from 'vuex'
 import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
 const store = useStore()
