@@ -41,18 +41,8 @@ watch(wsMessage,()=>{
 
   }
 })
-onMounted(()=>{
-  webSocketStore.connect()
- 
-})
-/* const ws = new WebSocket('ws://192.168.31.111/api/security/websocket/96eb6bf3-bf20-42e7-af33-24fd18bb9cbc');
-  
-  onMounted(()=>{
-    ws.onopen = function(e){
-    console.log('链接成功',e);
-    ws.send('1111');
-  }
-  }) */
+webSocketStore.connect()
+
 </script>
 <style>
 #app {
