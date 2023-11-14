@@ -153,6 +153,7 @@
         if (data.status === 200 ) {
           profilePhoto.value = "/api/file"+data.data.profilePhotoUrl;
           localStorage.setItem('organizationalId',data.data.organizationalId)
+          localStorage.setItem('userId',data.data.id)
         }
       },null,null)
   }
