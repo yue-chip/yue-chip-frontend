@@ -98,12 +98,12 @@
 </template>
 
 <script setup lang="ts">
+// @ts-nocheck
   import { PoweroffOutlined,EditOutlined,FormOutlined ,PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
   import {ref,computed,onMounted} from 'vue'
   import {FormInstance, message} from "ant-design-vue";
   import type { Rule } from 'ant-design-vue/es/form';
   import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
-  import {Md5} from 'ts-md5';
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
   let updateModel = ref({})
   let visible = ref<boolean>(false);
@@ -152,6 +152,8 @@
       (data:any)=>{
         if (data.status === 200 ) {
           profilePhoto.value = "/api/file"+data.data.profilePhotoUrl;
+          localStorage.setItem('organizationalId',data.data.organizationalId)
+          localStorage.setItem('userId',data.data.id)
         }
       },null,null)
   }

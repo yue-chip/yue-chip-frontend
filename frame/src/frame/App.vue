@@ -21,27 +21,31 @@ import layoutContent from "./components/content/content.vue"
 import { notification } from 'ant-design-vue';
 import { useWebSocketStore } from './store/websocket';
 import { storeToRefs } from 'pinia'
-import { watch ,onMounted} from 'vue';
+import { watch, onMounted } from 'vue';
 const webSocketStore = useWebSocketStore()
 const { wsMessage } = storeToRefs(webSocketStore)
 
-watch(wsMessage,()=>{
-  try{
+watch(wsMessage, () => {
+  try {
+    const msgObj = JSON.parse(wsMessage.value)
+    console.log(JSON.parse(wsMessage.value));
+    const alarmEvent = msgObj.alarmEvent
+    const device = msgObj.device
     notification.open({
-    message: 'Notification Title',
-    description:
-      'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-    style: {
-      width: '400px',
-      marginLeft: `${335 - 600}px`,
-    },
-    class: 'notification-custom-class',
-  });
-  }catch(err){
+      message: '新的警告',
+      description:
+        `告警内容: ${alarmEvent.content}<br>告警时间: ${device.lastTime}<br>${alarmEvent.address}`,
+      style: {
+        width: '400px',
+        marginLeft: `${335 - 600}px`,
+      },
+      class: 'notification-custom-class',
+    });
+  } catch (err) {
 
   }
-})
-onMounted(()=>{
+},{immediate:true})
+onMounted(() => {
   webSocketStore.connect()
 
 })
