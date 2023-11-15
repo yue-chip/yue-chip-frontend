@@ -1,9 +1,9 @@
 <template>
   <div class="menu__logo">
     <div class="menu__logo-icon">
-      <img src="../../../assets/images/logo.svg" />
+      <img src="../../../assets/images/logo.png" />
     </div>
-    <span>小未科技管理平台</span>
+    <span>金湾区消防平台</span>
   </div>
   <a-menu mode="inline" theme="dark" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys">
     <template v-for="resource in resources" :key="resource.id">

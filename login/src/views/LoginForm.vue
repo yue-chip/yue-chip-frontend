@@ -21,11 +21,12 @@
 </template>
 <script lang="ts" setup>
 
-  import { reactive, ref,getCurrentInstance} from 'vue'
+  import { reactive, ref} from 'vue'
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
   import { Form, Input, Row, Col, Button,message} from 'ant-design-vue'
+  import type { FormInstance } from 'ant-design-vue'
+  const loginForm = ref<FormInstance>()
   import {Md5} from 'ts-md5';
-  const _this:any = getCurrentInstance();
   const ACol = Col
   const ARow = Row
   const FormItem = Form.Item
@@ -57,7 +58,7 @@
     ],
   });
   function logion() {
-    _this.ctx.$refs.loginForm.validate().then(() => {
+    loginForm.value.validateFields().then(() => {
       const formData = new FormData();
       formData.append('password', Md5.hashStr(model.password));
       formData.append('username', model.username);
