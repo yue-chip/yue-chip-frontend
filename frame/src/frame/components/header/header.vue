@@ -10,7 +10,7 @@
               <img :src="profilePhoto" />
             </template>
           </a-avatar>
-          <div class="header__avatar-name">admin</div>
+          <div class="header__avatar-name">{{ info?.name }}</div>
         </div>
         <template #overlay>
           <a-menu>
@@ -109,6 +109,7 @@
   let visible = ref<boolean>(false);
   let visibleUpdatePassword = ref<boolean>(false);
   const updateUserInfo = ref<FormInstance>();
+  const info=ref<any>()
   const updatePasswordFrom = ref<FormInstance>();
   const fileList = ref([]);
   const loading = ref<boolean>(false);
@@ -154,6 +155,7 @@
           profilePhoto.value = "/api/file"+data.data.profilePhotoUrl;
           localStorage.setItem('organizationalId',data.data.organizationalId)
           localStorage.setItem('userId',data.data.id)
+          info.value=data.data
         }
       },null,null)
   }
@@ -196,6 +198,7 @@
             message.info(data.message);
           }
         },null,null)
+        
     }).catch((err: any) => {
     });
   }

@@ -2,7 +2,7 @@
 import { defineConfig } from 'vite'
 // @ts-ignore
 import vue from '@vitejs/plugin-vue'
-import {join,resolve} from 'path'
+import { join, resolve } from 'path'
 // @ts-ignore
 import viteCompression from 'vite-plugin-compression';
 import fs from "fs";
@@ -30,12 +30,12 @@ export default defineConfig(({ mode }) => {
     root: 'src',
     plugins: [
       vue(),
-      viteCompression({verbose: true,disable: false,threshold: 10240,algorithm: "gzip",ext: ".gz",}),
-      Components({resolvers: [AntDesignVueResolver({importStyle: false,}),],}),
+      viteCompression({ verbose: true, disable: false, threshold: 10240, algorithm: "gzip", ext: ".gz", }),
+      Components({ resolvers: [AntDesignVueResolver({ importStyle: false, }),], }),
     ],
     server: {
       port: 5175,
-      hmr: { overlay :false},
+      hmr: { overlay: false },
       host: '0.0.0.0'
     },
     resolve: {

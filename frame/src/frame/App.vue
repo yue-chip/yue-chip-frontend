@@ -34,7 +34,7 @@ watch(wsMessage, () => {
     notification.open({
       message: '新的警告',
       description:
-        `告警内容: ${alarmEvent.content}<br>告警时间: ${device.lastTime}<br>${alarmEvent.address}`,
+        `告警内容: ${alarmEvent.content}`+'\n'+`告警时间: ${device.lastTime}`+'\n'+`地址:${alarmEvent.address}`,
       style: {
         width: '400px',
         marginLeft: `${335 - 600}px`,
@@ -44,11 +44,13 @@ watch(wsMessage, () => {
   } catch (err) {
 
   }
-},{immediate:true})
+}, { immediate: true })
 onMounted(() => {
   webSocketStore.connect()
 
 })
+onMounted(() => { })
+
 /* const ws = new WebSocket('ws://192.168.31.111/api/security/websocket/96eb6bf3-bf20-42e7-af33-24fd18bb9cbc');
 
   onMounted(()=>{
@@ -123,5 +125,8 @@ onMounted(() => {
 
 .notification-custom-class {
   color: red;
+}
+.ant-notification{
+    white-space: pre-wrap!important;
 }
 </style>

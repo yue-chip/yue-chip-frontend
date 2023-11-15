@@ -1,7 +1,7 @@
 <template>
   <div class="menu__logo">
     <div class="menu__logo-icon">
-      <img src="../../../assets/images/logo.svg" />
+      <img src="../../../assets/images/logo.png" />
     </div>
     <span>小未科技管理平台</span>
   </div>
