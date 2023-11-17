@@ -11,7 +11,7 @@
         <layout-content />
       </a-layout-content>
     </a-layout>
-    <audio :muted="!ismute" class="audio" src="/public/static/y1054.mp3" type="audio/mpeg" loop>
+    <audio :muted="!ismute" class="audio" src="/static/y1054.mp3" type="audio/mpeg" loop>
     </audio>
   </a-layout>
 </template>
@@ -49,7 +49,7 @@ watch(wsMessage, () => {
             type: 'primary',
             size: 'small',
             danger: true,
-            onClick: () => { window.location.href = `http://192.168.31.111/alarm/#/alarminfo?id=${alarmEvent.id}`,audio.pause(), notification.close(key) }
+            onClick: () => {   window.open(`http://192.168.31.111/alarm/#/alarminfo?id=${alarmEvent.id}`, '_blank'),audio.pause(), notification.close(key) }
           },
           { default: () => '查看警告' },
         ),
@@ -67,6 +67,8 @@ watch(wsMessage, () => {
 })
 const ispaly = (e: boolean) => {
   ismute.value = e
+  
+    
 
 }
 /* const openNotification = () => {
@@ -94,6 +96,7 @@ const ispaly = (e: boolean) => {
  */
 onMounted(() => {
   webSocketStore.connect()
+  
   // openNotification()
 })
 
