@@ -1,6 +1,20 @@
 <template>
   <div class="layout__header" style="height: 40px;">
     <div class="header__left">
+      <a-tooltip :title="ismute
+          ? '禁用告警声音'
+          : '开启告警声音'
+          ">
+          <a-button class="nav-btn"  @click="ispaly" shape="circle">
+            <template #icon>
+              
+              <img src="../../../assets/images/sound.png" style="margin-top: 3px;"  v-if="ismute"/>
+              <img src="../../../assets/images/mute.png" style="margin-top: 3px;" v-else/>
+              
+             <!--  <icon-sound /> -->
+            </template>
+          </a-button>
+        </a-tooltip>
     </div>
     <div class="header__right">
       <a-dropdown :trigger="['click', 'hover']">
@@ -99,14 +113,16 @@
 
 <script setup lang="ts">
 // @ts-nocheck
-  import { PoweroffOutlined,EditOutlined,FormOutlined ,PlusOutlined, LoadingOutlined} from '@ant-design/icons-vue';
+  import { PoweroffOutlined,EditOutlined,FormOutlined ,PlusOutlined, LoadingOutlined,} from '@ant-design/icons-vue';
   import {ref,computed,onMounted} from 'vue'
   import {FormInstance, message} from "ant-design-vue";
   import type { Rule } from 'ant-design-vue/es/form';
   import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
+  const emit=defineEmits(['ispaly'])
   let updateModel = ref({})
   let visible = ref<boolean>(false);
+  const ismute=ref<boolean>(true)
   let visibleUpdatePassword = ref<boolean>(false);
   const updateUserInfo = ref<FormInstance>();
   const info=ref<any>()
@@ -268,6 +284,11 @@
     reader.addEventListener('load', () => callback(reader.result as string));
     reader.readAsDataURL(img);
   }
+  const ispaly = () => {
+  ismute.value = !ismute.value
+  emit('ispaly', ismute.value)
+
+}
 </script>
 
 
@@ -282,6 +303,7 @@
     display: flex;
     align-items: center;
     flex-grow: 1;
+    justify-content: flex-end;
     & .group__tabs {
       width: 500px;
       margin-left: 22px;
