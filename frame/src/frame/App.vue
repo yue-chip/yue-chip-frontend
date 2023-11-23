@@ -1,6 +1,13 @@
 <template>
+  <a-config-provider
+      :theme="{
+        token: {
+          colorPrimary: '#ff9b17',
+        },
+      }"
+    >
   <a-layout class="layout">
-    <a-layout-sider width="230">
+    <a-layout-sider width="230" style="background: #ffffff;">
       <layout-menu />
     </a-layout-sider>
     <a-layout>
@@ -14,6 +21,7 @@
     <audio :muted="!ismute" class="audio" src="/static/y1054.mp3" type="audio/mpeg" loop>
     </audio>
   </a-layout>
+</a-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -31,7 +39,7 @@ const { wsMessage } = storeToRefs(webSocketStore)
 watch(wsMessage, () => {
   try {
     const msgObj = JSON.parse(wsMessage.value)
-    console.log(JSON.parse(wsMessage.value));
+    console.log(JSON.parse(wsMessage.value),111);
     const audio: any = document.querySelector('.audio')
     const key = `open${Date.now()}`;
     audio.play()
@@ -116,7 +124,7 @@ onMounted(() => { })
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #333;
+  color: #fff;
 }
 </style>
 <style lang="scss" scoped>
@@ -165,7 +173,7 @@ onMounted(() => { })
   & .ant-layout-sider-children::-webkit-scrollbar-thumb {
     border-radius: 10px;
     box-shadow: inset 0 0 5px #d8d8d8;
-    background: #535353;
+    background: #d8d8d8;
   }
 
   & .ant-layout-sider-children::-webkit-scrollbar-track {

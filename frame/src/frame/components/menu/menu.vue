@@ -1,27 +1,29 @@
 <template>
-  <div class="menu__logo">
-    <div class="menu__logo-icon">
-      <img src="../../../assets/images/logo.png" />
+  
+    <div class="menu__logo">
+      <div class="menu__logo-icon">
+        <img src="../../../assets/images/logo.png" />
+      </div>
+      <span style="color: #333;font-weight: 500;">金湾区消防平台</span>
     </div>
-    <span>金湾区消防平台</span>
-  </div>
-  <a-menu mode="inline" theme="dark" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys">
-    <template v-for="resource in resources" :key="resource.id">
-      <template v-if="resource.children">
-        <a-sub-menu :key="resource.id">
+    <a-menu mode="inline" theme="light" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys">
+      <template v-for="resource in resources" :key="resource.id">
+        <template v-if="resource.children">
+          <a-sub-menu :key="resource.id">
 
-          <template #title>{{ resource.name }}</template>
-          <a-menu-item @click="showMenu(children.name, children.url, children.id)" v-for="children in resource.children"
-            :key="children.id">{{ children.name }}</a-menu-item>
-        </a-sub-menu>
+            <template #title>{{ resource.name }}</template>
+            <a-menu-item @click="showMenu(children.name, children.url, children.id)" v-for="children in resource.children"
+              :key="children.id">{{ children.name }}</a-menu-item>
+          </a-sub-menu>
+        </template>
+        <template v-else>
+          <a-menu-item :key="resource.key" @click="showMenu(resource.name, resource.url, resource.id)">
+            {{ resource.name }}
+          </a-menu-item>
+        </template>
       </template>
-      <template v-else>
-        <a-menu-item :key="resource.key" @click="showMenu(resource.name, resource.url, resource.id)">
-          {{ resource.name }}
-        </a-menu-item>
-      </template>
-    </template>
-  </a-menu>
+    </a-menu>
+
 </template>
 <script setup lang="ts">
 import { onMounted, reactive, ref, } from 'vue'
@@ -32,7 +34,7 @@ const store = useStore()
 let resources = ref();
 let openKeys = ref([""]);
 let selectedKeys = ref([""]);
-const router=useRouter()
+const router = useRouter()
 onMounted(() => {
   axios.axiosGet("/upms/console/currentUser/permissions", {}, (data: any) => {
     resources.value = data.data;
@@ -90,4 +92,5 @@ function showMenu(name: string, url: string, id: string) {
     color: #fff;
   }
 }
+
 </style>
