@@ -59,7 +59,7 @@ function initShowMenu(menu: any, parentId: any) {
 }
 
 function showMenu(name: string, url: string, id: string) {
-  if (url == '/visualization/') {
+  if (url == '/visualization/' || url == '/visualizationjw/') {
     window.open(url, '_blank');
   } else {
     store.commit('addMenu', { "title": name, "url": url + "?_t=" + new Date().getTime(), "key": id });
