@@ -7,10 +7,10 @@
           ">
           <a-button class="nav-btn"  @click="ispaly" shape="circle">
             <template #icon>
-              
+
               <img src="../../../assets/images/sound.png" style="margin-top: 3px;"  v-if="ismute"/>
               <img src="../../../assets/images/mute.png" style="margin-top: 3px;" v-else/>
-              
+
              <!--  <icon-sound /> -->
             </template>
           </a-button>
@@ -119,6 +119,7 @@
   import type { Rule } from 'ant-design-vue/es/form';
   import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
+  import { Md5 } from 'ts-md5';
   const emit=defineEmits(['ispaly'])
   let updateModel = ref({})
   let visible = ref<boolean>(false);
@@ -214,7 +215,7 @@
             message.info(data.message);
           }
         },null,null)
-        
+
     }).catch((err: any) => {
     });
   }
