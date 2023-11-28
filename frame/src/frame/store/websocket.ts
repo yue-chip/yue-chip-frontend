@@ -17,8 +17,7 @@ export const useWebSocketStore = defineStore({
             if (this.webSocket && this.webSocket.isOpen) return;
             //console.log(this.webSocket.isOpen);
             const token = sessionStorage.getItem("token");
-            //  @ts-ignore
-            const url = 'ws://'+import.meta.env.VITE_WEBSOCKET +'/websocket/'+token
+            const url = import.meta.env.VITE_WEBSOCKET +'/'+token
             const options = {
                 url,
                 messageCb: (msg: any) => {
