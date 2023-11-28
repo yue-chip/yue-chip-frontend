@@ -67,6 +67,7 @@ const rulesRef = reactive<any>({
   ],
 });
 function logion() {
+  // @ts-ignore
   loginForm.value.validateFields().then(() => {
     const formData = new FormData();
     formData.append('password', Md5.hashStr(model.password));
