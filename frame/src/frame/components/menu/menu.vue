@@ -17,7 +17,7 @@
           </a-sub-menu>
         </template>
         <template v-else>
-          <a-menu-item :key="resource.key" @click="showMenu(resource.name, resource.url, resource.id)">
+          <a-menu-item :key="resource.id" @click="showMenu(resource.name, resource.url, resource.id)">
             {{ resource.name }}
           </a-menu-item>
         </template>
@@ -59,7 +59,7 @@ function initShowMenu(menu: any, parentId: any) {
 }
 
 function showMenu(name: string, url: string, id: string) {
-  if (url == '/visualization/' || url == '/visualizationjw/') {
+  if (url == '/visualization/') {
     window.open(url, '_blank');
   } else {
     store.commit('addMenu', { "title": name, "url": url + "?_t=" + new Date().getTime(), "key": id });

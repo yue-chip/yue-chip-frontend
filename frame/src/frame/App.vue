@@ -57,7 +57,8 @@ watch(wsMessage, () => {
             type: 'primary',
             size: 'small',
             danger: true,
-            onClick: () => {   window.open(`http://192.168.31.111/alarm/#/alarminfo?id=${alarmEvent.id}`, '_blank'),audio.pause(), notification.close(key) }
+            //  @ts-ignore
+            onClick: () => {   window.open(`http://`+import.meta.env.VITE_URL+`/alarm/#/alarminfo?id=${alarmEvent.id}`, '_blank'),audio.pause(), notification.close(key) }
           },
           { default: () => '查看警告' },
         ),
