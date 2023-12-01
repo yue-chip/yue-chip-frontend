@@ -115,12 +115,14 @@
 // @ts-nocheck
   import { PoweroffOutlined,EditOutlined,FormOutlined ,PlusOutlined, LoadingOutlined,} from '@ant-design/icons-vue';
   import {ref,computed,onMounted} from 'vue'
+  import { useStore } from 'vuex'
   import {FormInstance, message} from "ant-design-vue";
   import type { Rule } from 'ant-design-vue/es/form';
   import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
   import { Md5 } from 'ts-md5';
   const emit=defineEmits(['ispaly'])
+  const store = useStore()
   let updateModel = ref({})
   let visible = ref<boolean>(false);
   const ismute=ref<boolean>(true)
@@ -162,16 +164,18 @@
   };
 
   onMounted(() => {
-    loadProfilePhoto();
+    loadUserInfo();
   });
 
-  function loadProfilePhoto(){
+  function loadUserInfo(){
     axios.axiosGet("/upms/console/current/user/details", {params:{}},
       (data:any)=>{
         if (data.status === 200 ) {
           profilePhoto.value = "/api/file"+data.data.profilePhotoUrl;
           localStorage.setItem('organizationalId',data.data.organizationalId)
           localStorage.setItem('userId',data.data.id)
+          localStorage.setItem('bigScreenName',data.data.bigScreenName)
+          store.commit('institutionName', data.data.tenantAbbreviation);
           info.value=data.data
         }
       },null,null)
