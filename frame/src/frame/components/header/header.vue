@@ -176,6 +176,7 @@
           localStorage.setItem('userId',data.data.id)
           localStorage.setItem('bigScreenName',data.data.bigScreenName)
           store.commit('institutionName', data.data.tenantAbbreviation);
+          document.title = data.data.tenantAbbreviation;
           info.value=data.data
         }
       },null,null)
