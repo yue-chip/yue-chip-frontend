@@ -1,7 +1,7 @@
 NODE_ENV=production
 VITE_BASEURL=""
 VITE_BASEAPI="/api"
-VITE_URL='jw.xiaovtech.com'
+VITE_URL='192.168.31.111'
 #dev
 VITE_WEBSOCKET="ws://120.236.242.10:8110/websocket"
 
