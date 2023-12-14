@@ -58,7 +58,7 @@ watch(wsMessage, () => {
             size: 'small',
             danger: true,
             //  @ts-ignore
-            onClick: () => {   window.open(`http://`+import.meta.env.VITE_URL+`/alarm/#/alarminfo?id=${alarmEvent.id}`,),audio.pause(), notification.close(key) }
+            onClick: () => { window.location.href=import.meta.env.VITE_URL+`/alarm/#/alarminfo?id=${alarmEvent.id}`,audio.pause(), notification.close(key) }
           },
           { default: () => '查看警告' },
         ),
