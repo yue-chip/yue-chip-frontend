@@ -16,18 +16,20 @@ export const useWebSocketStore = defineStore({
         connect() {
             if (this.webSocket && this.webSocket.isOpen) return;
             //console.log(this.webSocket.isOpen);
-          
+
             const token = sessionStorage.getItem("token");
               // @ts-ignore
-            const url = import.meta.env.VITE_WEBSOCKET +'/'+token
-            const options = {
+            if (import.meta.env.VITE_WEBSOCKET) {
+              const url = import.meta.env.VITE_WEBSOCKET + '/' + token
+              const options = {
                 url,
                 messageCb: (msg: any) => {
-                    this.$patch({ wsMessage: msg })
+                  this.$patch({wsMessage: msg})
                 }
+              }
+              this.webSocket = new ReconWebSocket(options)
+              console.log(this.webSocket);
             }
-            this.webSocket = new ReconWebSocket(options)
-            console.log( this.webSocket);
 
         },
         isConnect(): boolean {
