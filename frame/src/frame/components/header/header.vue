@@ -61,6 +61,41 @@
         </a-row>
         <a-row >
           <a-col :span="12">
+            <a-form-item label="邮箱" name="email" ref="email">
+              <a-input placeholder="请输入电子邮箱" v-model:value="updateModel.email" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="证件类型" name="IdCardType" ref="IdCardType">
+              <a-select v-model:value="updateModel.IdCardType">
+                <a-select-option value="0">身份证</a-select-option>
+              </a-select>
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row >
+          <a-col :span="12">
+            <a-form-item label="证书编号" name="certificateNumber" ref="certificateNumber">
+              <a-input placeholder="请输入证书编号" v-model:value="updateModel.certificateNumber" />
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-item label="身份证号码" name="identificationNumber" ref="identificationNumber">
+              <a-input placeholder="请输入身份证号码" v-model:value="updateModel.identificationNumber" />
+            </a-form-item>
+          </a-col>
+        </a-row>
+        <a-row >
+          <a-col :span="12">
+            <a-form-item label="所属机构" >
+              <a-input  v-model:value="updateModel.organizationalName" disabled/>
+            </a-form-item>
+          </a-col>
+          <a-col :span="12">
+          </a-col>
+        </a-row>
+        <a-row >
+          <a-col :span="12">
             <a-form-item label="头像" >
               <a-upload
                 v-model:file-list="fileList"
@@ -83,6 +118,26 @@
             </a-form-item>
           </a-col>
           <a-col :span="12">
+            <a-form-item label="其它照片" >
+              <a-upload
+                v-model:file-list="otherPhotoUrlList"
+                name="avatar"
+                list-type="picture-card"
+                class="avatar-uploader"
+                :show-upload-list="false"
+                action="/api/common/file/upload"
+                :before-upload="beforeUpload"
+                :headers="headers"
+                @change="handleChange1"
+              >
+                <img width="100" height="100" v-if="otherPhotoUrl" :src="otherPhotoUrl" alt="avatar" />
+                <div v-else>
+                  <loading-outlined v-if="otherPhotoLoading"></loading-outlined>
+                  <plus-outlined v-else></plus-outlined>
+                  <div class="ant-upload-text">Upload</div>
+                </div>
+              </a-upload>
+            </a-form-item>
           </a-col>
         </a-row>
       </a-form>
@@ -116,9 +171,8 @@
   import { PoweroffOutlined,EditOutlined,FormOutlined ,PlusOutlined, LoadingOutlined,} from '@ant-design/icons-vue';
   import {ref,computed,onMounted} from 'vue'
   import { useStore } from 'vuex'
-  import {FormInstance, message} from "ant-design-vue";
+  import {FormInstance, message,UploadChangeParam, UploadProps } from "ant-design-vue";
   import type { Rule } from 'ant-design-vue/es/form';
-  import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
   import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
   import { Md5 } from 'ts-md5';
   const emit=defineEmits(['ispaly'])
@@ -134,6 +188,10 @@
   const loading = ref<boolean>(false);
   let imageUrl = ref<string>('');
   let profilePhoto = ref<string>('');
+  const otherPhotoUrlList =ref([])
+  const otherPhotoLoading = ref<boolean>(false);
+  let otherPhotoUrl = ref<string>('');
+  let otherPhoto = ref<string>('');
   const rules:any={
     phoneNumber:[{required:true,message:"请输入联系电话",trigger:'blur'}],
     name:[{required:true,message:"请输入姓名",trigger:'blur'}]
@@ -215,8 +273,7 @@
       axios.axiosPut("/upms/console/user/update",updateModel.value,
         (data:any)=>{
           if (data.status === 200 ) {
-            cancel();
-            loadProfilePhoto();
+            // cancel();
             message.info(data.message);
           }
         },null,null)
@@ -272,6 +329,30 @@
       message.error('upload error');
     }
   };
+
+const handleChange1 = (info: UploadChangeParam) => {
+  if (info.file.status === 'uploading') {
+    otherPhotoLoading.value = true;
+    return;
+  }
+  if (info.file.status === 'done') {
+    if (info.file.response.status === 200) {
+      const data = info.file.response.data;
+      updateModel.value.otherPhotoId = data[0].id;
+      // profilePhoto.value = "/api"+data[0].url;
+      getBase64(info.file.originFileObj, (base64Url: string) => {
+        otherPhotoUrl.value = base64Url;
+        otherPhotoLoading.value = false;
+      });
+    }
+
+
+  }
+  if (info.file.status === 'error') {
+    loading.value = false;
+    message.error('upload error');
+  }
+};
 
   const beforeUpload = (file: UploadProps['fileList'][number]) => {
     const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png' || file.type === 'image/jpg';
