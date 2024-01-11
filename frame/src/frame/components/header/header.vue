@@ -274,7 +274,10 @@
           (data:any)=>{
             if (data.status === 200 ) {
               // cancel();
+              
               message.info(data.message);
+              visible.value=false
+              loadUserInfo()
             }
           },null,null)
   
