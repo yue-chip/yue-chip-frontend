@@ -72,29 +72,58 @@ function logion() {
     const formData = new FormData();
     formData.append('password', Md5.hashStr(model.password));
     formData.append('username', model.username);
-    formData.append('tenantNumber', model.tenantNumber);
     formData.append('grant_type', 'password');
     formData.append('client_id', 'yue-chip-client');
-    formData.append('client_secret', 'yue-chip-client');
+    formData.append('client_secret','yue-chip-client');
     formData.append('vCode', model.vCode);
-    formData.append('code', model.code);
-    axios.service.post('/upms/login1', formData, {
+    formData.append('code',model.code);
+    axios.service.post('/oauth2-authorization/oauth2/token', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
-    }).then((data) => {
-      if (data.status === 200) {
-        sessionStorage.setItem("token", data.data.token)
-        location.href = window.location.protocol + "//" + window.location.host + "/frame/";
+    }).then((data)=>{
+      if (data.status === 200){
+        if (data.data.access_token) {
+          sessionStorage.setItem("access_token", data.data.access_token)
+        }
+        if (data.data.token) {
+          sessionStorage.setItem("token", data.data.token)
+        }
+        location.href=window.location.protocol+"//"+window.location.host+"/frame/";
       }
     })
-      .catch(obj => {
-      })
-      .finally(() => {
-      });
+        .catch(obj => {
+        })
+        .finally(()=>{
+        });
   })
-    .catch((err: any) => {
-    });
+      .catch(err => {
+  });
+  //   formData.append('password', Md5.hashStr(model.password));
+  //   formData.append('username', model.username);
+  //   formData.append('tenantNumber', model.tenantNumber);
+  //   formData.append('grant_type', 'password');
+  //   formData.append('client_id', 'yue-chip-client');
+  //   formData.append('client_secret', 'yue-chip-client');
+  //   formData.append('vCode', model.vCode);
+  //   formData.append('code', model.code);
+  //   axios.service.post('/upms/login1', formData, {
+  //     headers: {
+  //       'Content-Type': 'multipart/form-data'
+  //     }
+  //   }).then((data) => {
+  //     if (data.status === 200) {
+  //       sessionStorage.setItem("token", data.data.token)
+  //       location.href = window.location.protocol + "//" + window.location.host + "/frame/";
+  //     }
+  //   })
+  //     .catch(obj => {
+  //     })
+  //     .finally(() => {
+  //     });
+  // })
+  //   .catch((err: any) => {
+  //   });
 }
 
 </script>

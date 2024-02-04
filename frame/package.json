@@ -6,6 +6,7 @@
     "dev": "vite --mode dev & node ./registerGateway.js",
     "build": "vite build --mode pro",
     "build-tencent": "vite build --mode pro-tencent",
+    "build-iot": "vite build --mode iot-pro",
     "build-localization": "vite build --mode pro-localization",
     "preview": "vite preview"
   },

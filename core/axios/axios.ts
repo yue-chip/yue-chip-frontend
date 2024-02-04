@@ -50,12 +50,17 @@ service.interceptors.request.use((config: any) => {
         });
     }
     const token = sessionStorage.getItem("token");
+    const access_token = sessionStorage.getItem("access_token");
+
     if (token && token !== ''){
         config.headers.token = `${token}`;
-        let request_host = sessionStorage.getItem("register_host");
-        if (request_host && request_host != 'null'){
-            config.headers.requestHost = request_host;
-        }
+    }
+    if (access_token && access_token !== ''){
+        config.headers.Authorization = `Bearer ${access_token}`;
+    }
+    let request_host = sessionStorage.getItem("register_host");
+    if (request_host && request_host != 'null'){
+        config.headers.requestHost = request_host;
     }
     return config;
 }, (error: any) => {
