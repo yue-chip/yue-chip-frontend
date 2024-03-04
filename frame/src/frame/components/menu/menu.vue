@@ -10,15 +10,25 @@
         <template v-for="resource in resources" :key="resource.id">
             <template v-if="resource.children">
                 <a-sub-menu :key="resource.id">
-
-                    <template #title>{{ resource.name }}</template>
-                    <a-menu-item @click="showMenu(children.name, children.url, children.id)"
-                        v-for="children in resource.children" :key="children.id">{{ children.name }}</a-menu-item>
+                  <template #icon>
+                    <img width="25" height="25" v-if="resource.iconUrl" :src="'/api/file'+resource.iconUrl" alt="avatar" />
+                  </template>
+                  <template #title>{{ resource.name }}</template>
+                  <a-menu-item @click="showMenu(children.name, children.url, children.id)"
+                      v-for="children in resource.children" :key="children.id">
+                    <template #icon>
+                      <img width="25" height="25" v-if="children.iconUrl" :src="'/api/file'+children.iconUrl" alt="avatar" />
+                    </template>
+                    {{ children.name }}
+                  </a-menu-item>
                 </a-sub-menu>
             </template>
             <template v-else>
                 <a-menu-item :key="resource.id" @click="showMenu(resource.name, resource.url, resource.id)">
-                    {{ resource.name }}
+                  <template #icon>
+                    <img width="25" height="25" v-if="resource.iconUrl" :src="'/api/file'+resource.iconUrl" alt="avatar" />
+                  </template>
+                  {{ resource.name }}
                 </a-menu-item>
             </template>
         </template>
@@ -80,21 +90,21 @@ const onOpenChange = (e: string[]) => {
     /* resources.value.forEach((item:any) => {
         list.push(item.id)
     }); */
-  
-   
+
+
     const latestOpenKey: any = e.find((key: string) => selectedKeys.value.indexOf(key) === -1);
     console.log(latestOpenKey);
 
     //openKeys.value = [latestOpenKey];
 /*     console.log(list.value.indexOf(latestOpenKey) == -1);
     console.log(latestOpenKey);
-    
+
 
 
     if (list.value.indexOf(latestOpenKey) == -1) {
         openKeys.value = openKeys;
         console.log(openKeys.value);
-        
+
     } else {
         openKeys.value = latestOpenKey ? [latestOpenKey] : [];
     }  */
