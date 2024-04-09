@@ -11,13 +11,13 @@
             <template v-if="resource.children">
                 <a-sub-menu :key="resource.id">
                   <template #icon>
-                    <img width="25" height="25" v-if="resource.iconUrl" :src="'/api/file'+resource.iconUrl" alt="avatar" />
+                    <img width="18" height="18" v-if="resource.iconUrl" :src="'/api/file'+resource.iconUrl" alt="avatar" />
                   </template>
                   <template #title>{{ resource.name }}</template>
                   <a-menu-item @click="showMenu(children.name, children.url, children.id)"
                       v-for="children in resource.children" :key="children.id">
                     <template #icon>
-                      <img width="25" height="25" v-if="children.iconUrl" :src="'/api/file'+children.iconUrl" alt="avatar" />
+                      <img width="18" height="18" v-if="children.iconUrl" :src="'/api/file'+children.iconUrl" alt="avatar" />
                     </template>
                     {{ children.name }}
                   </a-menu-item>
