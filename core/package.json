@@ -10,6 +10,6 @@
   },
   "devDependencies": {},
   "publishConfig": {
-    "registry": "http://127.0.0.1:8081/repository/npm-hosted/"
+    "registry": "http://192.168.31.202:8081/repository/npm-hosted/"
   }
 }
