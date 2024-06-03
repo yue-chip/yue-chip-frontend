@@ -154,7 +154,7 @@ onMounted(() => { })
     & .container::-webkit-scrollbar-thumb {
         border-radius: 10px;
         box-shadow: inset 0 0 5px #d8d8d8;
-        background: #C1C1C1;
+        background: #f2f4f3;
     }
 
     & .container::-webkit-scrollbar-track {

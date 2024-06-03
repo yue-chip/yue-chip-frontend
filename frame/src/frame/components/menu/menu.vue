@@ -13,7 +13,8 @@
 
                     <template #title>{{ resource.name }}</template>
                     <a-menu-item @click="showMenu(children.name, children.url, children.id)"
-                        v-for="children in resource.children" :key="children.id">{{ children.name }}</a-menu-item>
+                        v-for="children in resource.children" :key="children.id">{{ children.name }}
+                    </a-menu-item>
                 </a-sub-menu>
             </template>
             <template v-else>
@@ -34,14 +35,14 @@ let resources = ref();
 const openKeys = ref<any>([""]);
 const selectedKeys = ref(['']);
 const router = useRouter()
-const list=ref<string[]>([])
+const list = ref<string[]>([])
 onMounted(() => {
     axios.axiosGet("/upms/console/currentUser/permissions", {}, (data: any) => {
         resources.value = data.data;
         initShowMenu(data.data, 0);
-        resources.value.forEach((item:any) => {
-        list.value.push(item.id)
-    });
+        resources.value.forEach((item: any) => {
+            list.value.push(item.id)
+        });
     }, null, null)
 })
 
@@ -67,7 +68,7 @@ function showMenu(name: string, url: string, id: string) {
     console.log(selectedKeys.value);
 
     if (url == '/visualization/') {
-        window.open(url, '_blank');
+        window.open(url)
     } else {
         store.commit('addMenu', { "title": name, "url": url + "?_t=" + new Date().getTime(), "key": id });
     }
@@ -80,24 +81,24 @@ const onOpenChange = (e: string[]) => {
     /* resources.value.forEach((item:any) => {
         list.push(item.id)
     }); */
-  
-   
+
+
     const latestOpenKey: any = e.find((key: string) => selectedKeys.value.indexOf(key) === -1);
     console.log(latestOpenKey);
 
     //openKeys.value = [latestOpenKey];
-/*     console.log(list.value.indexOf(latestOpenKey) == -1);
-    console.log(latestOpenKey);
-    
-
-
-    if (list.value.indexOf(latestOpenKey) == -1) {
-        openKeys.value = openKeys;
-        console.log(openKeys.value);
+    /*     console.log(list.value.indexOf(latestOpenKey) == -1);
+        console.log(latestOpenKey);
         
-    } else {
-        openKeys.value = latestOpenKey ? [latestOpenKey] : [];
-    }  */
+    
+    
+        if (list.value.indexOf(latestOpenKey) == -1) {
+            openKeys.value = openKeys;
+            console.log(openKeys.value);
+            
+        } else {
+            openKeys.value = latestOpenKey ? [latestOpenKey] : [];
+        }  */
 
     /* console.log(e);
     openKeys.value=[""] */

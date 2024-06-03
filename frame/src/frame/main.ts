@@ -1,6 +1,6 @@
 // @ts-ignore
 import { createApp } from 'vue'
-import {createPinia} from 'pinia';
+import { createPinia } from 'pinia';
 import App from './App.vue'
 import store from './store'
 import customTheme from './theme.json';
