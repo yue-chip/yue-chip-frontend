@@ -163,16 +163,21 @@
         </a-modal>
         <a-modal width="500px" v-model:visible="open" title="在线帮助"  :footer="null">
            <a-space :size="20" style="margin-bottom: 20px;">
-                <div style="font-size: 16px;font-weight: 500;">消防管理应用平台(APP) 操作手册</div>
+                <div style="font-size: 16px;font-weight: 500;width: 250px">用户使用手册维保端小程序</div>
                 <a-button type="primary"  @click.prevent="look">查看</a-button>
                
                 <a-button type="primary"  @click="download">下载</a-button>
            </a-space>   
-           <a-space :size="20">
-                <div style="font-size: 16px;font-weight: 500;">消防管理应用平台(Web) 操作手册</div>
+           <a-space :size="20" style="margin-bottom: 20px;">
+                <div style="font-size: 16px;font-weight: 500;width: 250px">用户使用手册pc端</div>
                 <a-button type="primary" @click.prevent="look1">查看</a-button>
                 <a-button type="primary" @click="download1">下载</a-button>
            </a-space>  
+           <a-space :size="20">
+                <div style="font-size: 16px;font-weight: 500;width: 250px;">用户使用手册三小场所小程序端</div>
+                <a-button type="primary" @click.prevent="look2">查看</a-button>
+                <a-button type="primary" @click="download2">下载</a-button>
+           </a-space> 
         </a-modal>
 
     </div>
@@ -404,7 +409,7 @@ const look=()=>{
 const download=()=>{
     const a = document.createElement("a"); 
   a.href = "/static/text.pdf"; 
-  a.download = "消防管理应用平台(APP) 操作手册.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
+  a.download = "用户使用手册维保端小程序.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
   a.style.display = "none"; // 障眼法藏起来a标签
   document.body.appendChild(a); // 将a标签追加到文档对象中
   a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
@@ -414,10 +419,24 @@ const download=()=>{
 const look1=()=>{
     window.open('/static/text1.pdf?corp_id=test',)
 }
+
 const download1=()=>{
     const a = document.createElement("a"); 
   a.href = "/static/text1.pdf"; 
-  a.download = "消防管理应用平台(PC) 操作手册.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
+  a.download = "用户使用手册pc端.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
+  a.style.display = "none"; // 障眼法藏起来a标签
+  document.body.appendChild(a); // 将a标签追加到文档对象中
+  a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
+  a.remove(); // 一次性的，用完就删除a标签
+  return false
+}
+const look2=()=>{
+    window.open('/static/text2.pdf?corp_id=test',)
+}
+const download2=()=>{
+    const a = document.createElement("a"); 
+  a.href = "/static/text2.pdf"; 
+  a.download = "用户使用手册三小场所小程序端.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
   a.style.display = "none"; // 障眼法藏起来a标签
   document.body.appendChild(a); // 将a标签追加到文档对象中
   a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
