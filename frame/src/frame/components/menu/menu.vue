@@ -1,10 +1,10 @@
 <template>
-    <div class="menu__logo">
+   <!--  <div class="menu__logo">
         <div class="menu__logo-icon">
             <img src="../../../assets/images/logo.png" />
         </div>
         <span style="color: #333;font-weight: 500;">{{ store.state.institutionName }}</span>
-    </div>
+    </div> -->
     <a-menu mode="inline" theme="light" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys"
         @openChange="onOpenChange">
         <template v-for="resource in resources" :key="resource.id">
