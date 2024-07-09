@@ -1,11 +1,12 @@
 <template>
     <a-config-provider :theme="{
         token: {
-            colorPrimary: '#ff9b17',
+            colorPrimary: '#475ff5',
+
         },
-    }">
+    }" hash-priority="high">
         <a-layout class="layout">
-            <a-layout-header class="header" style="height: 40px;">
+            <a-layout-header class="header" style="height: 50px;">
                 <layout-header @ispaly="ispaly" />
             </a-layout-header>
             <a-layout>
@@ -168,6 +169,7 @@ onMounted(() => { })
     & .ant-layout-sider-children {
         overflow-y: auto;
         overflow-x: hidden;
+        background: #012755 ;
     }
 
     & .ant-layout-sider-children::-webkit-scrollbar {
@@ -193,4 +195,5 @@ onMounted(() => { })
 .ant-notification {
     white-space: pre-wrap !important;
 }
+
 </style>

@@ -5,7 +5,13 @@
         </div>
         <span style="color: #333;font-weight: 500;">{{ store.state.institutionName }}</span>
     </div> -->
-    <a-menu mode="inline" theme="light" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys"
+    <a-config-provider :theme="{
+        token: {
+            colorPrimary: '#f6001f',
+
+        },
+    }" hash-priority="high">
+    <a-menu style="background: #012755 !important;" mode="inline" theme="dark" v-model:openKeys="openKeys" v-model:selectedKeys="selectedKeys"
         @openChange="onOpenChange">
         <template v-for="resource in resources" :key="resource.id">
             <template v-if="resource.children">
@@ -24,6 +30,7 @@
             </template>
         </template>
     </a-menu>
+    </a-config-provider>
 </template>
 <script setup lang="ts">
 import { onMounted, reactive, ref, watch } from 'vue'
@@ -112,30 +119,18 @@ watch(() => store.state.activeKey, () => {
 
 })
 </script>
-<style lang="scss" scoped>
-.menu__logo {
-    display: flex;
-    align-items: center;
-    padding-left: 24px;
-    height: 64px;
-    line-height: 64px;
-    overflow: hidden;
-    white-space: nowrap;
+<style lang="less" scoped>
+:deep(.ant-menu-item-selected){
+    color: #fff !important;
+}
 
-    & .menu__logo-icon {
-        width: 32px;
-        margin-right: 8px;
-
-        img {
-            display: block;
-            width: 100%;
-        }
-    }
-
-    & span {
-        display: inline-block;
-        font-size: 20px;
-        color: #fff;
-    }
+:deep(.ant-menu-sub){
+    background-color: #012755 !important;
+}
+:deep(:where(.css-dev-only-do-not-override-1p88qvr).ant-menu ){
+    background: #012755 !important;
+}
+:deep(.ant-menu-dark) {
+  background: #012755 !important;
 }
 </style>

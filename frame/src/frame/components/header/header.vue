@@ -1,10 +1,10 @@
 <template>
-    <div class="layout__header" style="height: 40px;">
+    <div class="layout__header" style="height: 50px;">
         <div class="menu__logo">
             <div class="menu__logo-icon">
                 <img src="../../../assets/images/logo.png" />
             </div>
-            <span style="color: #000;font-weight: 500;">{{ store.state.institutionName }}</span>
+            <span style="color: #fff;font-weight: 500;">{{ store.state.institutionName }}</span>
         </div>
         <div class="header__left">
             <a-tooltip :title="ismute
@@ -460,6 +460,7 @@ const download2 = () => {
     align-items: center;
     padding: 0 22px;
     font-size: 20px;
+    background: #012755 ;
 
     & .header__left {
         display: flex;
@@ -491,6 +492,7 @@ const download2 = () => {
                 margin-left: 6px;
                 font-size: 14px;
                 vertical-align: middle;
+                color: #fff;
             }
         }
     }
