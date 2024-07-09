@@ -7,7 +7,7 @@
     </div> -->
     <a-config-provider :theme="{
         token: {
-            colorPrimary: '#f6001f',
+            colorPrimary: '#f54f5f',
 
         },
     }" hash-priority="high">
