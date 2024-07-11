@@ -1,5 +1,11 @@
 <template>
     <div class="layout__header" style="height: 40px;">
+        <div class="menu__logo">
+            <div class="menu__logo-icon">
+                <img src="../../../assets/images/logo.png" />
+            </div>
+            <span style="color: #000;font-weight: 500;">{{ store.state.institutionName }}</span>
+        </div>
         <div class="header__left">
             <a-tooltip :title="ismute
                 ? '禁用告警声音'
@@ -44,7 +50,7 @@
                             <template #icon>
                                 <BorderRightOutlined />
                             </template>
-                            在线帮助
+                            用户操作手册
                         </a-menu-item>
                         <a-menu-item key="4" @click="logout">
                             <template #icon>
@@ -57,8 +63,8 @@
             </a-dropdown>
         </div>
 
-        <a-modal width="800px" v-model:visible="visible" title="修改用户信息" cancelText="取消" okText="保存" :destroyOnClose="true"
-            :mask="true" :maskClosable="false" @cancel="cancel" @ok="update">
+        <a-modal width="800px" v-model:visible="visible" title="修改用户信息" cancelText="取消" okText="保存"
+            :destroyOnClose="true" :mask="true" :maskClosable="false" @cancel="cancel" @ok="update">
             <a-form ref="updateUserInfo" :rules="rules" :model="updateModel" :labelCol="{ span: 6, offset: 0 }">
                 <a-row>
                     <a-col :span="12">
@@ -142,7 +148,8 @@
 
 
         <a-modal width="500px" v-model:visible="visibleUpdatePassword" title="修改密码" cancelText="取消" okText="保存"
-            :destroyOnClose="true" :mask="true" :maskClosable="false" @cancel="cancelUpdatePassword" @ok="updatePassword">
+            :destroyOnClose="true" :mask="true" :maskClosable="false" @cancel="cancelUpdatePassword"
+            @ok="updatePassword">
             <a-form ref="updatePasswordFrom" :rules="rulesUpdatePassword" :model="updateModel"
                 :labelCol="{ span: 6, offset: 0 }">
                 <a-row>
@@ -161,31 +168,31 @@
                 </a-row>
             </a-form>
         </a-modal>
-        <a-modal width="500px" v-model:visible="open" title="在线帮助"  :footer="null">
-           <a-space :size="20" style="margin-bottom: 20px;">
+        <a-modal width="500px" v-model:visible="open" title="用户操作手册" :footer="null">
+            <a-space :size="20" style="margin-bottom: 20px;">
                 <div style="font-size: 16px;font-weight: 500;width: 250px">用户使用手册维保端小程序</div>
-                <a-button type="primary"  @click.prevent="look">查看</a-button>
-               
-                <a-button type="primary"  @click="download">下载</a-button>
-           </a-space>   
-           <a-space :size="20" style="margin-bottom: 20px;">
+                <a-button type="primary" @click.prevent="look">查看</a-button>
+
+                <a-button type="primary" @click="download">下载</a-button>
+            </a-space>
+            <a-space :size="20" style="margin-bottom: 20px;">
                 <div style="font-size: 16px;font-weight: 500;width: 250px">用户使用手册pc端</div>
                 <a-button type="primary" @click.prevent="look1">查看</a-button>
                 <a-button type="primary" @click="download1">下载</a-button>
-           </a-space>  
-           <a-space :size="20">
+            </a-space>
+            <a-space :size="20">
                 <div style="font-size: 16px;font-weight: 500;width: 250px;">用户使用手册三小场所小程序端</div>
                 <a-button type="primary" @click.prevent="look2">查看</a-button>
                 <a-button type="primary" @click="download2">下载</a-button>
-           </a-space> 
+            </a-space>
         </a-modal>
 
     </div>
 </template>
-  
+
 <script setup lang="ts">
 // @ts-nocheck
-import { PoweroffOutlined, EditOutlined, FormOutlined, PlusOutlined, LoadingOutlined, BorderRightOutlined} from '@ant-design/icons-vue';
+import { PoweroffOutlined, EditOutlined, FormOutlined, PlusOutlined, LoadingOutlined, BorderRightOutlined } from '@ant-design/icons-vue';
 import { ref, computed, onMounted } from 'vue'
 import { useStore } from 'vuex'
 import { FormInstance, message, UploadChangeParam, UploadProps } from "ant-design-vue";
@@ -193,7 +200,7 @@ import type { Rule } from 'ant-design-vue/es/form';
 import axios from "@yue-chip/yue-chip-frontend-core/axios/axios";
 import { Md5 } from 'ts-md5';
 const emit = defineEmits(['ispaly'])
-const open=ref(false)
+const open = ref(false)
 const store = useStore()
 let updateModel = ref({})
 let visible = ref<boolean>(false);
@@ -397,55 +404,55 @@ const ispaly = () => {
     emit('ispaly', ismute.value)
 
 }
-const onlineHelp=()=>{
-    open.value=true
+const onlineHelp = () => {
+    open.value = true
 }
-const openFile=()=>{
-    
+const openFile = () => {
+
 }
-const look=()=>{
+const look = () => {
     window.open('/static/text.pdf?corp_id=test',)
 }
-const download=()=>{
-    const a = document.createElement("a"); 
-  a.href = "/static/text.pdf"; 
-  a.download = "用户使用手册维保端小程序.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
-  a.style.display = "none"; // 障眼法藏起来a标签
-  document.body.appendChild(a); // 将a标签追加到文档对象中
-  a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
-  a.remove(); // 一次性的，用完就删除a标签
-  return false
+const download = () => {
+    const a = document.createElement("a");
+    a.href = "/static/text.pdf";
+    a.download = "用户使用手册维保端小程序.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
+    a.style.display = "none"; // 障眼法藏起来a标签
+    document.body.appendChild(a); // 将a标签追加到文档对象中
+    a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
+    a.remove(); // 一次性的，用完就删除a标签
+    return false
 }
-const look1=()=>{
+const look1 = () => {
     window.open('/static/text1.pdf?corp_id=test',)
 }
 
-const download1=()=>{
-    const a = document.createElement("a"); 
-  a.href = "/static/text1.pdf"; 
-  a.download = "用户使用手册pc端.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
-  a.style.display = "none"; // 障眼法藏起来a标签
-  document.body.appendChild(a); // 将a标签追加到文档对象中
-  a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
-  a.remove(); // 一次性的，用完就删除a标签
-  return false
+const download1 = () => {
+    const a = document.createElement("a");
+    a.href = "/static/text1.pdf";
+    a.download = "用户使用手册pc端.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
+    a.style.display = "none"; // 障眼法藏起来a标签
+    document.body.appendChild(a); // 将a标签追加到文档对象中
+    a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
+    a.remove(); // 一次性的，用完就删除a标签
+    return false
 }
-const look2=()=>{
+const look2 = () => {
     window.open('/static/text2.pdf?corp_id=test',)
 }
-const download2=()=>{
-    const a = document.createElement("a"); 
-  a.href = "/static/text2.pdf"; 
-  a.download = "用户使用手册三小场所小程序端.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
-  a.style.display = "none"; // 障眼法藏起来a标签
-  document.body.appendChild(a); // 将a标签追加到文档对象中
-  a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
-  a.remove(); // 一次性的，用完就删除a标签
-  return false
+const download2 = () => {
+    const a = document.createElement("a");
+    a.href = "/static/text2.pdf";
+    a.download = "用户使用手册三小场所小程序端.pdf"; // 设置下载文件文件名，这里加上.xlsx指定文件类型，pdf文件就指定.fpd即可
+    a.style.display = "none"; // 障眼法藏起来a标签
+    document.body.appendChild(a); // 将a标签追加到文档对象中
+    a.click(); // 模拟点击了a标签，会触发a标签的href的读取，浏览器就会自动下载了
+    a.remove(); // 一次性的，用完就删除a标签
+    return false
 }
 </script>
-  
-  
+
+
 <style lang="scss" scoped>
 .layout__header {
     display: flex;
@@ -498,5 +505,29 @@ const download2=()=>{
         }
     }
 }
+.menu__logo {
+    display: flex;
+    align-items: center;
+    padding-left: 24px;
+    height: 64px;
+    line-height: 64px;
+    overflow: hidden;
+    white-space: nowrap;
+
+    & .menu__logo-icon {
+        width: 32px;
+        margin-right: 8px;
+
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    & span {
+        display: inline-block;
+        font-size: 20px;
+        color: #fff;
+    }
+}
 </style>
-  

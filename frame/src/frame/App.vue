@@ -5,13 +5,13 @@
         },
     }">
         <a-layout class="layout">
-            <a-layout-sider width="230" style="background: #ffffff;">
-                <layout-menu />
-            </a-layout-sider>
+            <a-layout-header class="header" style="height: 40px;">
+                <layout-header @ispaly="ispaly" />
+            </a-layout-header>
             <a-layout>
-                <a-layout-header class="header" style="height: 40px;">
-                    <layout-header @ispaly="ispaly" />
-                </a-layout-header>
+                <a-layout-sider width="230" style="background: #ffffff;">
+                    <layout-menu />
+                </a-layout-sider>
                 <a-layout-content class="container">
                     <layout-content />
                 </a-layout-content>
@@ -58,9 +58,9 @@ watch(wsMessage, () => {
                         //  @ts-ignore
                         onClick: () => {
                             const hostname = window.location.hostname;
-                            const protocol = window.location.protocol; 
-                            window.location.href = `${protocol}//${hostname}/alarm/#/alarminfo?id=${alarmEvent.id}`, audio.pause(), 
-                            notification.close(key)
+                            const protocol = window.location.protocol;
+                            window.location.href = `${protocol}//${hostname}/alarm/#/alarminfo?id=${alarmEvent.id}`, audio.pause(),
+                                notification.close(key)
                         }
                     },
                     { default: () => '查看警告' },
