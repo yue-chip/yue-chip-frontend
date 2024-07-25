@@ -6,6 +6,7 @@
         "dev": "  vite --mode dev & node ./registerGateway.js",
         "build": "vite build --mode test",
         "build:pro": "vite build --mode pro",
+        "build:pro-tencent": "vite build --mode pro-tencent",
         "preview": "vite preview"
     },
     "dependencies": {
