@@ -1,10 +1,10 @@
 <template>
-    <div class="layout__header" style="height: 50px;">
+    <div class="layout__header" style="height: 80px;">
         <div class="menu__logo">
             <div class="menu__logo-icon">
                 <img src="../../../assets/images/logo.png" />
             </div>
-            <span style="color: #fff;font-weight: 500;">{{ store.state.institutionName }}</span>
+            <span style="color: #fff;font-weight: 700;">{{ store.state.institutionName }}</span>
         </div>
         <div class="header__left">
             <a-tooltip :title="ismute

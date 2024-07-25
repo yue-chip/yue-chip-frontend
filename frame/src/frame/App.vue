@@ -6,7 +6,7 @@
         },
     }" hash-priority="high">
         <a-layout class="layout">
-            <a-layout-header class="header" style="height: 50px;">
+            <a-layout-header class="header" style="height: 80px;">
                 <layout-header @ispaly="ispaly" />
             </a-layout-header>
             <a-layout>
