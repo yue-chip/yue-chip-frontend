@@ -1,5 +1,5 @@
 <template>
-   <!--  <div class="menu__logo">
+    <!--  <div class="menu__logo">
         <div class="menu__logo-icon">
             <img src="../../../assets/images/logo.png" />
         </div>
@@ -67,7 +67,7 @@ function showMenu(name: string, url: string, id: string) {
     console.log(store.state.activeKey);
     console.log(selectedKeys.value);
 
-    if (url == '/visualization/') {
+    if (url == '/visualization/' || url == '/deviceVisualization/') {
         window.open(url)
     } else {
         store.commit('addMenu', { "title": name, "url": url + "?_t=" + new Date().getTime(), "key": id });
